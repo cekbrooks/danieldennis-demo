@@ -210,6 +210,39 @@ export const team: TeamMember[] = [
   },
 ];
 
+export type Testimonial = {
+  quote: string;
+  name: string;
+  role: string;
+  org: string;
+};
+
+// NB: demo content. Plausible but fictional — replace with real quotes
+// from the firm before any prospect actually reads this site.
+export const testimonials: Testimonial[] = [
+  {
+    quote:
+      "DD&Co. delivered our Single Audit two weeks ahead of the federal deadline and walked our board through every finding. The first audit firm in fifteen years that didn't cause a fire drill.",
+    name: "Lauren Mitchell",
+    role: "Chief Financial Officer",
+    org: "Boston Charter Education Network",
+  },
+  {
+    quote:
+      "Our LIHTC partnership returns and cost certifications used to live across three different vendors. Kris's team brought it all in-house and we cut our annual close by a month.",
+    name: "Daniel Park",
+    role: "Director of Finance",
+    org: "Common Ground Community Housing",
+  },
+  {
+    quote:
+      "We're a $14M nonprofit and we needed a CPA firm that actually understood functional expense allocation and donor restrictions. DD&Co. trained our finance committee in plain English.",
+    name: "Renée Thompson",
+    role: "Executive Director",
+    org: "Greater Boston Arts Coalition",
+  },
+];
+
 export const stats = [
   { value: "1981", label: "Founded" },
   { value: "8", label: "Partners" },

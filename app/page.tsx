@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Aurora } from "@/components/Aurora";
 import { CountUp } from "@/components/CountUp";
+import { Marquee } from "@/components/Marquee";
 import { Reveal } from "@/components/Reveal";
 import {
   approachImage,
@@ -12,6 +14,7 @@ import {
   services,
   stats,
   team,
+  testimonials,
 } from "@/lib/data";
 
 export default function HomePage() {
@@ -19,10 +22,12 @@ export default function HomePage() {
     <main className="flex-1">
       <Nav />
       <Hero />
+      <Marquee />
       <Stats />
       <Services />
       <Industries />
       <Team />
+      <Testimonials />
       <Approach />
       <Contact />
       <Footer />
@@ -76,12 +81,13 @@ function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover opacity-90"
         />
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-r from-[#FAF8F4] via-[#FAF8F4]/95 to-[#FAF8F4]/40"
+          className="absolute inset-0 bg-gradient-to-r from-[#FAF8F4] via-[#FAF8F4]/96 to-[#FAF8F4]/55"
         />
+        <Aurora />
         <div
           aria-hidden
           className="absolute inset-0 bg-gradient-to-b from-[#FAF8F4]/40 via-transparent to-[#FAF8F4]"
@@ -264,6 +270,54 @@ function Team() {
 }
 
 // ---------------------------------------------------------------------------
+
+function Testimonials() {
+  return (
+    <section className="border-b border-black/5 bg-[#FAF8F4]">
+      <div className="mx-auto max-w-6xl px-6 py-24 md:py-28">
+        <div className="max-w-2xl">
+          <p className="text-xs font-medium uppercase tracking-[0.22em] text-[#B5894A]">
+            What clients say
+          </p>
+          <h2 className="font-display mt-4 text-4xl leading-[1.1] tracking-tight md:text-5xl">
+            The audit you wished you&apos;d had years ago.
+          </h2>
+        </div>
+        <div className="mt-16 grid gap-6 md:grid-cols-3">
+          {testimonials.map((t, i) => (
+            <Reveal
+              key={t.name}
+              as="article"
+              delay={i * 0.08}
+              className="group relative rounded-2xl border border-black/8 bg-[#FAF8F4] p-7 transition hover:border-[#B5894A]/40 hover:shadow-[0_24px_60px_-30px_rgba(181,137,74,0.45)]"
+            >
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition duration-500 group-hover:opacity-100"
+                style={{
+                  background:
+                    "radial-gradient(600px circle at var(--x,50%) var(--y,0%), rgba(181,137,74,0.10), transparent 40%)",
+                }}
+              />
+              <div className="relative">
+                <span aria-hidden className="font-display text-5xl leading-none text-[#B5894A]/60">
+                  &ldquo;
+                </span>
+                <p className="-mt-2 leading-relaxed text-[#0F1B2D]">{t.quote}</p>
+                <div className="mt-7 border-t border-black/8 pt-5">
+                  <p className="font-display text-base tracking-tight">{t.name}</p>
+                  <p className="text-sm text-[#3B4A63]">
+                    {t.role} · {t.org}
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function Approach() {
   return (
