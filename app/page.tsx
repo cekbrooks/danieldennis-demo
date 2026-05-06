@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CountUp } from "@/components/CountUp";
+import { Reveal } from "@/components/Reveal";
 import {
   approachImage,
   contact,
@@ -85,7 +87,7 @@ function Hero() {
           className="absolute inset-0 bg-gradient-to-b from-[#FAF8F4]/40 via-transparent to-[#FAF8F4]"
         />
       </div>
-      <div className="relative mx-auto max-w-6xl px-6 py-24 md:py-32">
+      <Reveal as="div" className="relative mx-auto max-w-6xl px-6 py-24 md:py-32">
         <p className="text-xs font-medium uppercase tracking-[0.22em] text-[#B5894A]">
           {firm.city} CPAs · Established {firm.founded}
         </p>
@@ -109,7 +111,7 @@ function Hero() {
             See what we do →
           </a>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
@@ -120,11 +122,13 @@ function Stats() {
   return (
     <section className="border-b border-black/5 bg-[#F1ECE0]/60">
       <div className="mx-auto grid max-w-6xl grid-cols-2 gap-x-8 gap-y-10 px-6 py-16 md:grid-cols-4">
-        {stats.map((s) => (
-          <div key={s.label}>
-            <div className="font-display text-4xl tracking-tight md:text-5xl">{s.value}</div>
+        {stats.map((s, i) => (
+          <Reveal key={s.label} delay={i * 0.08}>
+            <div className="font-display text-4xl tracking-tight md:text-5xl">
+              <CountUp value={s.value} />
+            </div>
             <div className="mt-2 text-sm text-[#3B4A63]">{s.label}</div>
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>
@@ -150,11 +154,15 @@ function Services() {
             </p>
           </div>
           <div className="grid gap-px bg-black/5 md:grid-cols-2">
-            {services.map((s) => (
-              <div key={s.slug} className="bg-[#FAF8F4] p-7 transition hover:bg-[#F1ECE0]">
+            {services.map((s, i) => (
+              <Reveal
+                key={s.slug}
+                delay={(i % 2) * 0.06 + Math.floor(i / 2) * 0.05}
+                className="bg-[#FAF8F4] p-7 transition hover:bg-[#F1ECE0]"
+              >
                 <h3 className="font-display text-xl tracking-tight">{s.name}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-[#3B4A63]">{s.short}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -176,9 +184,11 @@ function Industries() {
           We don&apos;t audit everyone. We audit organizations like yours, deeply.
         </h2>
         <div className="mt-16 grid gap-6 md:grid-cols-2">
-          {industries.map((i) => (
-            <article
+          {industries.map((i, idx) => (
+            <Reveal
               key={i.slug}
+              as="article"
+              delay={idx * 0.08}
               className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#1E2D4A]"
             >
               <Image
@@ -198,7 +208,7 @@ function Industries() {
                 </h3>
                 <p className="mt-3 leading-relaxed text-[#FAF8F4]/80">{i.blurb}</p>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -226,8 +236,13 @@ function Team() {
           </p>
         </div>
         <div className="mt-16 grid gap-x-6 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {team.map((m) => (
-            <article key={m.slug} className="group">
+          {team.map((m, i) => (
+            <Reveal
+              key={m.slug}
+              as="article"
+              delay={(i % 4) * 0.05}
+              className="group"
+            >
               <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-[#F1ECE0]">
                 <Image
                   src={m.image}
@@ -240,7 +255,7 @@ function Team() {
               <h3 className="font-display mt-4 text-lg tracking-tight">{m.name}</h3>
               <p className="text-sm text-[#B5894A]">{m.role}</p>
               <p className="mt-3 text-sm leading-relaxed text-[#3B4A63]">{m.bio}</p>
-            </article>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -279,14 +294,14 @@ function Approach() {
             { n: "02", t: "Calendar-aware planning", d: "We map our timeline to your funder reports, board meetings, and DESE/HUD/DOL deadlines — and commit to dates in writing." },
             { n: "03", t: "Fixed scope, fixed fee", d: "Audit, single audit, tax, and UFR engagements are quoted as a fixed fee. Surprises are on us, not you." },
             { n: "04", t: "A board-ready deliverable", d: "We don't hand you a 90-page draft and disappear. Every report comes with a board memo, an exit conversation, and a written set of recommendations." },
-          ].map((step) => (
-            <div key={step.n} className="flex gap-6">
+          ].map((step, i) => (
+            <Reveal key={step.n} delay={i * 0.07} className="flex gap-6">
               <span className="font-display text-2xl text-[#B5894A]">{step.n}</span>
               <div>
                 <h3 className="font-display text-xl tracking-tight text-[#0F1B2D]">{step.t}</h3>
                 <p className="mt-2 leading-relaxed">{step.d}</p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
