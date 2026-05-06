@@ -81,7 +81,11 @@ export type Industry = {
   slug: string;
   name: string;
   blurb: string;
+  image: string;
 };
+
+const UNSPLASH = "https://images.unsplash.com/photo-";
+const opts = "w=1200&q=80&auto=format&fit=crop";
 
 export const industries: Industry[] = [
   {
@@ -89,26 +93,34 @@ export const industries: Industry[] = [
     name: "Nonprofit organizations",
     blurb:
       "Mission-driven organizations from arts and culture to human services. We understand donor restrictions, functional expense allocation, and the GAAP that surrounds them.",
+    image: `${UNSPLASH}1559523161-0fc0d8b38a7a?${opts}`,
   },
   {
     slug: "charter-schools",
     name: "Charter schools",
     blurb:
       "Massachusetts charters with state and federal reporting obligations. We file your audited financials, your single audit, and your DESE schedules on the same calendar.",
+    image: `${UNSPLASH}1580582932707-520aed937b7b?${opts}`,
   },
   {
     slug: "affordable-housing",
     name: "Affordable housing",
     blurb:
       "Owners and operators of LIHTC, HUD, and state-assisted projects. Cost certifications, REAC submissions, and partnership returns under one roof.",
+    image: `${UNSPLASH}1568605114967-8130f3a36994?${opts}`,
   },
   {
     slug: "employee-benefit-plans",
     name: "Employee benefit plans",
     blurb:
       "ERISA-governed 401(k), 403(b), and defined-benefit plans. Limited- and full-scope audits, Form 5500 filings, and DOL-correspondence support.",
+    image: `${UNSPLASH}1497366811353-6870744d04b2?${opts}`,
   },
 ];
+
+export const heroImage = `${UNSPLASH}1486406146926-c627a92ad1ab?w=2400&q=85&auto=format&fit=crop`;
+export const approachImage = `${UNSPLASH}1542744173-8e7e53415bb0?${opts}`;
+export const contactImage = `${UNSPLASH}1496307653780-42ee777d4833?${opts}`;
 
 export type TeamMember = {
   slug: string;

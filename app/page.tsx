@@ -1,6 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { contact, firm, industries, services, stats, team } from "@/lib/data";
+import {
+  approachImage,
+  contact,
+  contactImage,
+  firm,
+  heroImage,
+  industries,
+  services,
+  stats,
+  team,
+} from "@/lib/data";
 
 export default function HomePage() {
   return (
@@ -56,8 +66,26 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="border-b border-black/5">
-      <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+    <section className="relative overflow-hidden border-b border-black/5">
+      <div className="absolute inset-0">
+        <Image
+          src={heroImage}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-r from-[#FAF8F4] via-[#FAF8F4]/95 to-[#FAF8F4]/40"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-b from-[#FAF8F4]/40 via-transparent to-[#FAF8F4]"
+        />
+      </div>
+      <div className="relative mx-auto max-w-6xl px-6 py-24 md:py-32">
         <p className="text-xs font-medium uppercase tracking-[0.22em] text-[#B5894A]">
           {firm.city} CPAs · Established {firm.founded}
         </p>
@@ -76,7 +104,7 @@ function Hero() {
           </a>
           <a
             href="#services"
-            className="rounded-full border border-[#0F1B2D]/15 px-7 py-3.5 text-sm font-medium text-[#0F1B2D] transition hover:border-[#0F1B2D]/40"
+            className="rounded-full border border-[#0F1B2D]/15 bg-[#FAF8F4]/70 px-7 py-3.5 text-sm font-medium text-[#0F1B2D] backdrop-blur transition hover:border-[#0F1B2D]/40"
           >
             See what we do →
           </a>
@@ -147,12 +175,30 @@ function Industries() {
         <h2 className="font-display mt-4 max-w-3xl text-4xl leading-[1.1] tracking-tight md:text-5xl">
           We don&apos;t audit everyone. We audit organizations like yours, deeply.
         </h2>
-        <div className="mt-16 grid gap-px bg-white/10 md:grid-cols-2">
+        <div className="mt-16 grid gap-6 md:grid-cols-2">
           {industries.map((i) => (
-            <div key={i.slug} className="bg-[#0F1B2D] p-8 md:p-10">
-              <h3 className="font-display text-2xl tracking-tight text-[#FAF8F4]">{i.name}</h3>
-              <p className="mt-4 leading-relaxed text-[#FAF8F4]/70">{i.blurb}</p>
-            </div>
+            <article
+              key={i.slug}
+              className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#1E2D4A]"
+            >
+              <Image
+                src={i.image}
+                alt=""
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover transition duration-700 group-hover:scale-105"
+              />
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-gradient-to-t from-[#0F1B2D] via-[#0F1B2D]/80 to-[#0F1B2D]/10"
+              />
+              <div className="absolute inset-x-0 bottom-0 p-7 md:p-8">
+                <h3 className="font-display text-2xl tracking-tight text-[#FAF8F4] md:text-3xl">
+                  {i.name}
+                </h3>
+                <p className="mt-3 leading-relaxed text-[#FAF8F4]/80">{i.blurb}</p>
+              </div>
+            </article>
           ))}
         </div>
       </div>
@@ -215,6 +261,17 @@ function Approach() {
           <h2 className="font-display mt-4 text-4xl leading-[1.1] tracking-tight md:text-5xl">
             Engagements built around your calendar — not ours.
           </h2>
+          <div className="mt-10 hidden aspect-[4/5] overflow-hidden rounded-2xl md:block">
+            <div className="relative h-full w-full">
+              <Image
+                src={approachImage}
+                alt=""
+                fill
+                sizes="(min-width: 768px) 40vw, 90vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
         </div>
         <div className="space-y-10 text-[#3B4A63]">
           {[
@@ -243,7 +300,7 @@ function Contact() {
   return (
     <section id="contact" className="bg-[#F1ECE0]/60">
       <div className="mx-auto max-w-6xl px-6 py-24 md:py-28">
-        <div className="grid gap-16 md:grid-cols-2">
+        <div className="grid gap-16 md:grid-cols-2 md:items-center">
           <div>
             <p className="text-xs font-medium uppercase tracking-[0.22em] text-[#B5894A]">Get in touch</p>
             <h2 className="font-display mt-4 text-4xl leading-[1.1] tracking-tight md:text-5xl">
@@ -252,6 +309,15 @@ function Contact() {
             <p className="mt-6 max-w-md text-[#3B4A63]">
               The quickest way to scope an audit, tax, or advisory engagement is a 20-minute call with a partner. We&apos;ll send a fee proposal within a week.
             </p>
+            <div className="relative mt-10 hidden aspect-[5/3] overflow-hidden rounded-2xl md:block">
+              <Image
+                src={contactImage}
+                alt=""
+                fill
+                sizes="(min-width: 768px) 45vw, 90vw"
+                className="object-cover"
+              />
+            </div>
           </div>
           <dl className="space-y-8 text-[#0F1B2D]">
             <div>
