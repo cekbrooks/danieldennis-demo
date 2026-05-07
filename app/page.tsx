@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Aurora } from "@/components/Aurora";
-import { CountUp } from "@/components/CountUp";
-import { Marquee } from "@/components/Marquee";
 import { Reveal } from "@/components/Reveal";
+import { Marquee } from "@/components/ui/marquee";
+import { NumberTicker } from "@/components/ui/number-ticker";
 import {
   approachImage,
   contact,
@@ -22,7 +22,7 @@ export default function HomePage() {
     <main className="flex-1">
       <Nav />
       <Hero />
-      <Marquee />
+      <CredentialsMarquee />
       <Stats />
       <Services />
       <Industries />
@@ -124,6 +124,47 @@ function Hero() {
 
 // ---------------------------------------------------------------------------
 
+const CREDENTIALS = [
+  "MA Charter Schools",
+  "LIHTC",
+  "403(b) Plans",
+  "Single Audit",
+  "Form 990",
+  "Mass UFR",
+  "DESE Reporting",
+  "HUD REAC",
+  "401(k) Audits",
+  "Cost Certifications",
+  "Agreed-Upon Procedures",
+  "Form 5500",
+  "Affordable Housing",
+  "Nonprofits",
+  "Charter Schools",
+  "Employee Benefit Plans",
+];
+
+function CredentialsMarquee() {
+  return (
+    <div className="relative overflow-hidden border-y border-black/5 bg-[#FAF8F4]">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#FAF8F4] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#FAF8F4] to-transparent" />
+      <Marquee pauseOnHover className="py-6 [--duration:50s] [--gap:2.5rem]">
+        {CREDENTIALS.map((c) => (
+          <span
+            key={c}
+            className="flex shrink-0 items-center gap-10 font-display text-2xl tracking-tight text-[#3B4A63]/55"
+          >
+            {c}
+            <span aria-hidden className="text-[#B5894A]/45">
+              ✦
+            </span>
+          </span>
+        ))}
+      </Marquee>
+    </div>
+  );
+}
+
 function Stats() {
   return (
     <section className="border-b border-black/5 bg-[#F1ECE0]/60">
@@ -131,7 +172,19 @@ function Stats() {
         {stats.map((s, i) => (
           <Reveal key={s.label} delay={i * 0.08}>
             <div className="font-display text-4xl tracking-tight md:text-5xl">
-              <CountUp value={s.value} />
+              {(() => {
+                const m = s.value.match(/^(\d+)(.*)$/);
+                if (!m) return s.value;
+                return (
+                  <>
+                    <NumberTicker
+                      value={Number(m[1])}
+                      className="font-display tracking-tight text-[#0F1B2D]"
+                    />
+                    {m[2]}
+                  </>
+                );
+              })()}
             </div>
             <div className="mt-2 text-sm text-[#3B4A63]">{s.label}</div>
           </Reveal>
